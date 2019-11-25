@@ -16,12 +16,21 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         meta = Sighting._meta
-        field_names = [field.name for field in meta.fields]
+        field_names = [f.name for f in meta.fields]
+        file_path = options['file_path']
+        
+        print(file_path)
+#        field_names = [field.name for field in meta.fields]
 
-        response = HttpResponse(content_type='text/csv')
-        response['Content-Disposition'] = 'attachment; filename={file_path}.csv'.format(meta) #need to check if this is the right way to put in file path name
-        writer = csv.writer(response)
+#        response = HttpResponse(content_type='text/csv')
+        
+#        response['Content-Disposition'] = f"attachment; filename={'file_path'}.csv".format(meta) #need to check if this is the right way to put in file path name
+        with open(file_path,'w') as csvfile:
+            writer = csv.writer(csvfile)
 
-        writer.writerow(field_names)
-        for instance in Sighting.objects.all().select_related(): 
-            writer.writerow([unicode(getattr(instance, f)).encode('utf-8') for f in field_names])
+            writer.writerow(field_names)
+            for instance in Sighting.objects.all():
+#                writer.writerow([b'\xf0\x9f\x8d\xa9 + \xf0\x9f\x8d\xb5' for field in field_names])
+                writer.writerow([getattr(instance, field) for field in field_names])
+        
+#        return response

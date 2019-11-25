@@ -1,0 +1,2 @@
+id,age,color,latitude,longitude,date,location,specifc_location,running,chasing,climbing,eating,foraging,other_activities,kuks,quaas,moans,tail_flags,tail_twitches,approaches,indifferent,runs_from
+1,Adult,Gray,70.750000000000000,70.750000000000000,2019-11-25,Above Ground,hi,True,False,True,True,False,hi,True,True,True,True,False,True,False,True
