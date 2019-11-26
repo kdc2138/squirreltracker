@@ -73,7 +73,7 @@ class Sighting(models.Model):
         #default=?
     )
 
-    specifc_location = models.CharField(
+    specific_location = models.CharField(
         help_text=_('Specific Location'),
         max_length=255,
     )
