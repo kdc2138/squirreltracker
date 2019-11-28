@@ -5,6 +5,28 @@
     {% leaflet_css %}
   </head>
   <body>
-    {% leaflet_map "yourmap" %}
+    <script type="text/javascript">
+        function map_init_basic(map, options) {
+	    var marker = null;
+	    map.setView([40.7829,-73.9654],13);
+        	{% for sighting in sightings %}
+		id = "{{sighting.id}}";
+		color =  "{{sighting.color}}";
+		loc = "{{sighting.location}}" ;
+		pop_message = `
+		<h3>
+		   ID:  ${id}
+		</h3>
+		<p> Color: ${color}</p>
+			<p> Update sighting <a href="{% url 'name_of_view' {{sighting.id}}"> here </a> 
+
+		
+		`; 
+		marker = new L.marker([{{sighting.latitude}},{{ sighting.longitude}}]).bindPopup(pop_message).addTo(map);
+                {% endfor %}		
+		{# L.marker([36.6183,-121.9018]).addTo(map);#}
+	}
+    </script>
+    {% leaflet_map "yourmap" callback="window.map_init_basic"  %}
   </body>
 </html>
