@@ -4,7 +4,7 @@ from .forms import SightingForm
 
 # Create your views here.
 def index(request):
-    context = {"sightings": Sighting.objects.all()}
+    context = {"sightings": Sighting.objects.all(), "field_names": Sighting._meta.get_fields()}
     return render(request, 'sightings/index.html',context)
 
 def add_sighting(request):

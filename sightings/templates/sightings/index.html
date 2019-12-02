@@ -1,5 +1,41 @@
-    <ul>
-    {% for sighting  in sightings %}
-        <li> {{sighting.id}} </li>
-    {% endfor %}
-    </ul>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sightings/style.css' %}">
+<table>
+	<thead>
+		<tr>
+		  {% for field_name in field_names %} 
+		  <th> {{field_name.help_text}} </th>
+		  {% endfor %}
+		</tr>
+
+	</thead>
+	<tbody>
+	  {% for sighting in sightings %}
+	  <tr>
+		  <td> <a href="/sightings/{{sighting.id}}">{{sighting.id}}</a> </td>
+		  <td>{{sighting.age}} </td>
+		  <td>{{sighting.color}} </td>
+		  <td>{{sighting.latitude}} </td>
+		  <td>{{sighting.longitude}} </td>
+		  <td>{{sighting.date}} </td>
+		  <td>{{sighting.location}} </td>
+		  <td>{{sighting.specific_location}} </td>
+		  <td>{{sighting.running}} </td>
+		  <td>{{sighting.chasing}} </td>
+		  <td>{{sighting.climbing}} </td>
+		  <td>{{sighting.eating}} </td>
+		  <td>{{sighting.foraging}} </td>
+		  <td>{{sighting.other_activities}} </td>
+		  <td>{{sighting.kuks}} </td>
+		  <td>{{sighting.quaas}} </td>
+		  <td>{{sighting.moans}} </td>
+		  <td>{{sighting.tail_flags}} </td>
+		  <td>{{sighting.tail_twitches}} </td>
+		  <td>{{sighting.approaches}} </td>
+		  <td>{{sighting.indifferent}} </td>
+		  <td>{{sighting.runs_from}} </td>
+	  </tr>
+           {% endfor %}
+	</tbody>
+</table>
+
