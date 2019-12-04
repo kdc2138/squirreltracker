@@ -33,13 +33,11 @@ class SightingUpdateView(UpdateView):
     context_object_name = 'sighting'
 
     def form_valid(self,form):
-        if 'update_sighting' in self.request.POST:
+        if 'update' in self.request.POST:
             x = form.save(commit=False)
-            x.save()
-           # self.update_instance(form.cleaned_data)
+            x.save()      
             return HttpResponseRedirect(reverse('sightings:index'))
-           # return super(SightingUpdateView,self).form_valid(form)
-        elif 'delete_sighting' in self.request.POST:
+        elif 'delete' in self.request.POST:
             form.instance.delete()
             return HttpResponseRedirect(reverse('sightings:index'))
 
