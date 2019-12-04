@@ -22,6 +22,7 @@ class Sighting(models.Model):
         help_text=_('Squirel Age'),
         max_length=20,
         choices=AGE_CHOICES,
+        blank = True,
        # default=ADULT (needs to be blank if not specified so default value not needed?),
     )
 
@@ -39,6 +40,7 @@ class Sighting(models.Model):
         help_text=_('Squirrel Fur Color'),
         max_length=20,
         choices=COLOR_CHOICES,
+        blank =True,
         # default=? (needs to ba blank if not specified?
     )
 
@@ -70,6 +72,7 @@ class Sighting(models.Model):
         help_text=_('Location'),
         max_length=20,
         choices=LOCATION_CHOICES,
+        blank = True,
         #default=?
     )
 

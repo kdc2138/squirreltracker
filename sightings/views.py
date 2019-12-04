@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Sighting
 from .forms import SightingForm
+from django.views.generic import UpdateView
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -21,11 +24,28 @@ def add_sighting(request):
     form = SightingForm()
     return render(request, 'sightings/add_sighting.html', {'form': form})
 
+class SightingUpdateView(UpdateView):
+    model = Sighting
+   # fields = '__all__' if we want user to change ID use this line instead of form class
+    form_class = SightingForm
+    template_name = 'sightings/detail.html'
+    pk_url_kwarg = 'id'
+    context_object_name = 'sighting'
 
+    def form_valid(self,form):
+        if 'update_sighting' in self.request.POST:
+            x = form.save(commit=False)
+            x.save()
+           # self.update_instance(form.cleaned_data)
+            return HttpResponseRedirect(reverse('sightings:index'))
+           # return super(SightingUpdateView,self).form_valid(form)
+        elif 'delete_sighting' in self.request.POST:
+            form.instance.delete()
+            return HttpResponseRedirect(reverse('sightings:index'))
 
-def detail(request, id):
+#def detail(request, id):
     #sighting = get_object_or_404(Sighting, id=pk)
-    sighting = Sighting.objects.get(id=id)
+#    sighting = Sighting.objects.get(id=id)
     #if request.method == "POST":
         #form = SightingForm(requesr.POST, instance=sighting)
         #if form.is_valid():
@@ -34,6 +54,7 @@ def detail(request, id):
             #sighting.save()
             #return redirect('detail', pk=sighting.pk)
     #else:
-    form = SightingForm(instance=sighting)
-    return render(request, 'sightings/detail.html', {'form': form})
+ #   form = SightingForm(instance=sighting)
+ #   context = {"sighting": sighting,}
+ #   return render(request, 'sightings/detail.html', {'form': form}, context)
 

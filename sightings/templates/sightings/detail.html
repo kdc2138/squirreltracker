@@ -1,10 +1,11 @@
 {% block content %}
 <title> </title>
 <h2>Update or Delete Sighting </h2>
-<form action="/your-name/" method="post", class="post-form">
+<p>Unique Squirrel ID: {{sighting.id}}</p>
+<form action="" method="post", class="post-form">
     {% csrf_token %}
     {{ form.as_p }}
-    <input type="submit" value="Submit">
+    <input type="submit" name = "update_sighting" value="Update Sighting">
+    <input type="submit" name = "delete_sighting" value="Delete Sighting">
 </form>
-<button> Delete Sighting </button>
 {%endblock %}
