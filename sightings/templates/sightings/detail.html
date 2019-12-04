@@ -1,0 +1,10 @@
+{% block content %}
+<title> </title>
+<h2>Update or Delete Sighting </h2>
+<form action="/your-name/" method="post", class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+<button> Delete Sighting </button>
+{%endblock %}

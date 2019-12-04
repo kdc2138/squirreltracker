@@ -22,8 +22,10 @@ def add_sighting(request):
     return render(request, 'sightings/add_sighting.html', {'form': form})
 
 
-#def detail(request, pk):
-    #sighting = get_object_or_404(Sighting, pk=pk)
+
+def detail(request, id):
+    #sighting = get_object_or_404(Sighting, id=pk)
+    sighting = Sighting.objects.get(id=id)
     #if request.method == "POST":
         #form = SightingForm(requesr.POST, instance=sighting)
         #if form.is_valid():
@@ -32,6 +34,6 @@ def add_sighting(request):
             #sighting.save()
             #return redirect('detail', pk=sighting.pk)
     #else:
-        #form = SightingForm(instance=sighting)
-    #return render(request, 'sightings/add_sighting.html', {'form': form})
+    form = SightingForm(instance=sighting)
+    return render(request, 'sightings/detail.html', {'form': form})
 
