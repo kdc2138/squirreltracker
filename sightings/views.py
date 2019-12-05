@@ -7,22 +7,23 @@ from django.urls import reverse
 
 # Create your views here.
 def index(request):
-    context = {"sightings": Sighting.objects.all(), "field_names": Sighting._meta.get_fields()}
+    context = {"sightings": Sighting.objects.all().order_by('id'), "field_names": Sighting._meta.get_fields()}
     return render(request, 'sightings/index.html',context)
 
 def add_sighting(request):
     #sighting_instance = get_object_or_404(
 
-   # if request.method == 'POST':
-        #form =SightingForm(request.POST)
-        #if form.is_valid():
-            #sighting = form.save(commit=False)
-            #sighting.id = have to get unique squirrel id
-            #sighting.save()
-            #return redirect('detail', pk='unique_squirrl_id')
-   # else:
-    form = SightingForm()
-    return render(request, 'sightings/add_sighting.html', {'form': form})
+    if request.method == 'POST':
+        form =SightingForm(request.POST)
+        if form.is_valid():
+            x=form['id'].value()
+            sighting = form.save(commit=False)
+            # sighting.id = have to get unique squirrel id
+            sighting.save()
+            return redirect(f'sightings/{x}')
+    else:
+        form = SightingForm()
+        return render(request, 'sightings/add_sighting.html', {'form': form})
 
 class SightingUpdateView(UpdateView):
     model = Sighting
@@ -41,18 +42,11 @@ class SightingUpdateView(UpdateView):
             form.instance.delete()
             return HttpResponseRedirect(reverse('sightings:index'))
 
-#def detail(request, id):
-    #sighting = get_object_or_404(Sighting, id=pk)
-#    sighting = Sighting.objects.get(id=id)
-    #if request.method == "POST":
-        #form = SightingForm(requesr.POST, instance=sighting)
-        #if form.is_valid():
-            #sighting = form.save(commit=False)
-            #sighting.id = have to get unique squirrel id
-            #sighting.save()
-            #return redirect('detail', pk=sighting.pk)
-    #else:
- #   form = SightingForm(instance=sighting)
- #   context = {"sighting": sighting,}
- #   return render(request, 'sightings/detail.html', {'form': form}, context)
+def stats(request):
+    
+    total_sightings = Sighting.objects.count()
+    gray = Sighting.objects.filter(color='Gray').count()
+    cinnamon = Sighting.objects.filter(color='Cinnamon').count()
+    black = Sighting.objects.filter(color='Black').count()
 
+    return render(request, 'sightings/stats.html' )
