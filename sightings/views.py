@@ -48,5 +48,25 @@ def stats(request):
     gray = Sighting.objects.filter(color='Gray').count()
     cinnamon = Sighting.objects.filter(color='Cinnamon').count()
     black = Sighting.objects.filter(color='Black').count()
+    kuks_true = Sighting.objects.filter(kuks=True).count()
+    above_ground = Sighting.objects.filter(location='Above Ground').count()
+    ground_plane = Sighting.objects.filter(location='Ground Plane').count()
+    eating_true = Sighting.objects.filter(eating=True).count()
+    adult = Sighting.objects.filter(age='Adult').count()
+    juvenile = Sighting.objects.filter(age='Juvenile').count()
 
-    return render(request, 'sightings/stats.html' )
+    #color = {'gray':gray, 'cinnamon':cinnamon, 'black':black}
+
+    context = {
+            'total_sightings': total_sightings,
+            'gray': gray,
+            'cinnamon': cinnamon,
+            'black': black,
+            'kuks': kuks_true,
+            'above_ground': above_ground,
+            'ground_plane': ground_plane,
+            'eating_true': eating_true,
+            'adult': adult,
+            'juvenile': juvenile,
+            }
+    return render(request, 'sightings/stats.html', context )

@@ -1,6 +1,32 @@
-<html>
-<header><title>This is title</title></header>
+{% block content %}
+    <title></title>
+    <h2>Statistics</h2>
+
 <body>
-Hello world
+	<p>
+		There were a total of {{total_sightings}} sightings.
+	</p>
+	<p>
+	There were:<br>{{cinnamon}} cinnamon squirrels,<br>
+		{{gray}} gray squirrels,<br>
+		{{black}} black squirrels
+	</p>
+	<p>
+	{{kuks}} squirrels were heard kukking.
+	</p>
+	<p>
+	{{above_ground}} were seen above ground. <br>
+	{{ground_plane}} were seen on the ground.
+	</p>
+	<p>
+	{{eating_true}} were seen eating.
+	</p>
+
+	<p>
+	There were {{adult}} adult squirrels and {{juvenile}} juvenile squirrels.
+	</p>
 </body>
-</html>
+
+{% endblock %}
+
+
