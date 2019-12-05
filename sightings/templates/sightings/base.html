@@ -2,23 +2,15 @@
 <html>
     <head>
         <title>Squirrel Tracker</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'sightings/style.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            <a href="{% url 'add_sighting' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-            <h1><a href="/">Squirrel Tracker</a></h1>
-        </div>
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
+	<nav>
+            <h1><a href="/map/">Squirrel Tracker</a></h1>
+	    <a href="/sightings/">Sightings</a>
+	    <a href="/sightings/add">Add Sighting</a>
+        </nav>     
+         {% block content %}
+         {% endblock %}
     </body>
 </html>

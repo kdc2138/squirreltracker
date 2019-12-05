@@ -15,12 +15,11 @@
 		loc = "{{sighting.location}}" ;
 		pop_message = `
 		<h3>
-		   ID:  ${id}
+		    <a href="/sightings/{{sighting.id}}">{{sighting.id}}</a> 
 		</h3>
-		<p> Color: ${color}</p>
-			<p> Update sighting <a href="{% url 'name_of_view' {{sighting.id}}"> here </a> 
+		<p> Color: ${color}</p> 
+		<p> Location: ${loc}</p>
 
-		
 		`; 
 		marker = new L.marker([{{sighting.latitude}},{{ sighting.longitude}}]).bindPopup(pop_message).addTo(map);
                 {% endfor %}		

@@ -20,7 +20,7 @@ def add_sighting(request):
             sighting = form.save(commit=False)
             # sighting.id = have to get unique squirrel id
             sighting.save()
-            return redirect(f'sightings/{x}')
+            return redirect(f'/sightings/{x}')
     else:
         form = SightingForm()
         return render(request, 'sightings/add_sighting.html', {'form': form})
