@@ -1,5 +1,5 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'sightings/style.css' %}">
+{% extends "sightings/base.html" %}
+{% block content %}
 <table>
 	<thead>
 		<tr>
@@ -38,4 +38,4 @@
            {% endfor %}
 	</tbody>
 </table>
-
+{%endblock %}

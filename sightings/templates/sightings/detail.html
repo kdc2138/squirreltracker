@@ -1,7 +1,8 @@
+{% extends "sightings/base.html" %}
 {% block content %}
 <title> </title>
 <h2>Update or Delete Sighting </h2>
-<p>Unique Squirrel ID: {{sighting.id}}</p>
+<p>Unique Squirrel ID should follow the following format: Hecatre ID-Shift-Date-Squirrel Number</p>
 <form action="" method="post", class="post-form">
     {% csrf_token %}
     {{ form.as_p }}

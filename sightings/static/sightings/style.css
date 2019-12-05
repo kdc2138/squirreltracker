@@ -1,10 +1,29 @@
 table {
 	border-collapse: collapse;
+        margin: 8px;
 }
 
 th, td {
 	min-width: 150px;
 	padding: 10px;
 	border: 1px solid gray;
+}
+
+body {
+	margin: 0px;
+}
+
+nav a {
+        padding: 25px;
+	text-decoration: none;
+}
+
+nav h1 {
+   display: inline;
+}
+
+nav {
+    height: 50px;
+    background-color: brown;
 }
 
