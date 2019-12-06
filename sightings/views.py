@@ -23,7 +23,7 @@ def add_sighting(request):
             return redirect(f'/sightings/{x}')
     else:
         form = SightingForm()
-        return render(request, 'sightings/add_sighting.html', {'form': form})
+    return render(request, 'sightings/add_sighting.html', {'form': form})
 
 class SightingUpdateView(UpdateView):
     model = Sighting
@@ -35,13 +35,16 @@ class SightingUpdateView(UpdateView):
 
     def form_valid(self,form):
         if 'update' in self.request.POST:
-            x = form.save(commit=False)
-            x.save()      
-            return HttpResponseRedirect(reverse('sightings:index'))
+            if form.is_valid():
+                i=form['id'].value()
+                x = form.save(commit=False)
+                x.save()      
+            return redirect(f'/sightings/{i}')
         elif 'delete' in self.request.POST:
             form.instance.delete()
             return HttpResponseRedirect(reverse('sightings:index'))
 
+        return render(request, 'sightings/detail.html', {'form': form})
 def stats(request):
     
     total_sightings = Sighting.objects.count()

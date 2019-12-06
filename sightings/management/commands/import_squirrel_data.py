@@ -16,44 +16,45 @@ class Command(BaseCommand):
 
 
     def import_data_from_csv(self, filename):
-        with open(filename, 'r') as csv_file:
-            data = csv.reader(csv_file, delimiter=',')
-            headers = next(data)
+        with open(filename) as fp:
+            reader = csv.DictReader(fp)
+            data = list(reader)
+            
             for data_object in data:
-                id =  data_object[2]
-                age = data_object[7]
-                color = data_object[8]
-                latitude = data_object[1]
-                longitude = data_object[0]
-                date = dt.datetime.strptime(data_object[5].strip(),'%m%d%Y').date()
-                location = data_object[12]
-                specific_location = data_object[14]
-                pre_running = data_object[15]
+                id =  data_object['Unique Squirrel ID']
+                age = data_object['Age']
+                color = data_object['Primary Fur Color']
+                latitude = data_object['Y']
+                longitude = data_object['X']
+                date = dt.datetime.strptime(data_object['Date'].strip(),'%m%d%Y').date()
+                location = data_object['Location']
+                specific_location = data_object['Specific Location']
+                pre_running = data_object['Running']
                 running = True if "true" in pre_running.lower() else False
-                pre_chasing = data_object[16]
+                pre_chasing = data_object['Chasing']
                 chasing = True if "true" in pre_chasing.lower() else False
-                pre_climbing = data_object[17]
+                pre_climbing = data_object['Climbing']
                 climbing  = True if "true" in pre_climbing.lower() else False
-                pre_eating = data_object[18]
+                pre_eating = data_object['Eating']
                 eating = True if "true" in pre_eating.lower() else False
-                pre_foraging = data_object[19]
+                pre_foraging = data_object['Foraging']
                 foraging = True if "true" in pre_foraging.lower() else False
-                other_activities = data_object[20]
-                pre_kuks = data_object[21]
+                other_activities = data_object['Other Activities']
+                pre_kuks = data_object['Kuks']
                 kuks = True if "true" in pre_kuks.lower() else False
-                pre_quaas = data_object[22]
+                pre_quaas = data_object['Quaas']
                 quaas = True if "true" in pre_quaas.lower() else False
-                pre_moans = data_object[23]
+                pre_moans = data_object['Moans']
                 moans  = True if "true" in pre_moans.lower() else False
-                pre_tail_flags = data_object[24]
+                pre_tail_flags = data_object['Tail flags']
                 tail_flags = True if "true" in pre_tail_flags.lower() else False
-                pre_tail_twitches = data_object[25]
+                pre_tail_twitches = data_object['Tail twitches']
                 tail_twitches  = True if "true" in pre_tail_twitches.lower() else False
-                pre_approaches = data_object[26]
+                pre_approaches = data_object['Approaches']
                 approaches  = True if "true" in pre_approaches.lower() else False
-                pre_indifferent = data_object[27]
+                pre_indifferent = data_object['Indifferent']
                 indifferent = True if "true" in pre_indifferent.lower() else False
-                pre_runs_from = data_object[28]
+                pre_runs_from = data_object['Runs from']
                 runs_from = True if "true" in pre_runs_from.lower() else False
                 try:
                     sighting, created = Sighting.objects.get_or_create(
