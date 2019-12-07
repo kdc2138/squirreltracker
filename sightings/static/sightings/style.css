@@ -11,19 +11,24 @@ th, td {
 
 body {
 	margin: 0px;
+	width: fit-content;
 }
 
 nav a {
         padding: 25px;
-	text-decoration: none;
+ 	text-decoration: none;
+        color: black;
 }
 
-nav h1 {
-   display: inline;
+nav a:visited {
+        color: black;
 }
 
 nav {
     height: 50px;
-    background-color: brown;
+    background-color: tan;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
 }
 
